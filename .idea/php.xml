@@ -120,6 +120,12 @@
       <path value="$PROJECT_DIR$/test_api/vendor/psr/simple-cache" />
       <path value="$PROJECT_DIR$/test_api/vendor/psy/psysh" />
       <path value="$PROJECT_DIR$/test_api/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/test_api/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/test_api/vendor/swagger-api/swagger-ui" />
+      <path value="$PROJECT_DIR$/test_api/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/test_api/vendor/darkaonline/l5-swagger" />
+      <path value="$PROJECT_DIR$/test_api/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/test_api/vendor/zircote/swagger-php" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0">
