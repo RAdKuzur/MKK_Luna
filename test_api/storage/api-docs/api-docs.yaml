@@ -1,0 +1,162 @@
+openapi: 3.0.0
+info:
+  title: TEST API
+  description: API документация ТЗ
+  version: 1.0.0
+paths:
+  /api/companies:
+    get:
+      tags:
+        - Companies
+      summary: Получить список компаний
+      parameters:
+        - name: name
+          in: query
+          description: Имя компании для поиска
+          required: false
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: Тип здания для поиска по местоположению
+          required: false
+          schema:
+            type: string
+        - name: radius
+          in: query
+          description: Радиус поиска (требуется с latitude и longitude)
+          required: false
+          schema:
+            type: number
+        - name: longitude
+          in: query
+          description: Долгота для поиска по местоположению
+          required: false
+          schema:
+            type: number
+        - name: latitude
+          in: query
+          description: Широта для поиска по местоположению
+          required: false
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Список компаний
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  companies:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+
+  /api/companies/{id}:
+    get:
+      tags:
+        - Companies
+      summary: Получить информацию о компании по ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID компании
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Информация о компании
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  company:
+                    $ref: '#/components/schemas/Company'
+
+  /api/companies/{id}/buildings:
+    get:
+      tags:
+        - Companies
+      summary: Получить компании в здании по ID здания
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID здания
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Список компаний в здании
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  companies:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+
+  /api/activities/{id}/companies:
+    get:
+      tags:
+        - Activities
+      summary: Получить компании по ID вида деятельности
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID вида деятельности
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Список компаний с указанным видом деятельности
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  companies:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+
+  /api/activities/{id}/companies/with-children:
+    get:
+      tags:
+        - Activities
+      summary: Получить компании по ID вида деятельности включая дочерние виды
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID родительского вида деятельности
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Список компаний с указанным видом деятельности и дочерними видами
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  companies:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company'
+
+components:
+  schemas:
+    Company:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
