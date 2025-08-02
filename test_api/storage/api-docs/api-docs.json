@@ -79,7 +79,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
             }
         },
         "/api/companies/{id}": {
@@ -116,7 +121,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
             }
         },
         "/api/companies/{id}/buildings": {
@@ -156,7 +166,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
             }
         },
         "/api/activities/{id}/companies": {
@@ -196,7 +211,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
             }
         },
         "/api/activities/{id}/companies/with-children": {
@@ -236,7 +256,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
             }
         }
     },
@@ -267,8 +292,20 @@
                 },
                 "type": "object"
             }
+        },
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "name": "token",
+                "in": "header"
+            }
         }
     },
+    "security": [
+        {
+            "api_key": []
+        }
+    ],
     "tags": [
         {
             "name": "Companies",

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TokenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [TokenController::class, 'index'])->name('token.index');
+Route::post('\create', [TokenController::class, 'create'])->name('token.create');

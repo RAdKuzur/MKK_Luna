@@ -34,23 +34,41 @@ use Illuminate\Http\Request;
  *     @OA\Property(property="building_id", type="integer", example=1),
  *     @OA\Property(property="created_at", type="integer", example="2025-08-01T16:48:18.000000Z"),
  *     @OA\Property(property="updated_at", type="integer", example="2025-08-01T16:48:18.000000Z"),
- *
  * )
+ * @OA\SecurityScheme(
+ *      securityScheme="api_key",
+ *      type="apiKey",
+ *      in="header",
+ *      name="token"
+ *  )
+ * @OA\OpenApi(
+ *      security={{"api_key": {}}}
+ *  )
  */
 class CompanyApiController extends Controller
 {
+    private CompanyRepository $companyRepository;
+    private CompanyActivityRepository $companyActivityRepository;
+    private ActivityService $activityService;
+    private BuildingService $buildingService;
     public function __construct(
-        private CompanyRepository $companyRepository,
-        private CompanyActivityRepository $companyActivityRepository,
-        private ActivityService $activityService,
-        private BuildingService $buildingService
-    ) {}
+        CompanyRepository $companyRepository,
+        CompanyActivityRepository $companyActivityRepository,
+        ActivityService $activityService,
+        BuildingService $buildingService
+    ) {
+        $this->companyRepository = $companyRepository;
+        $this->companyActivityRepository = $companyActivityRepository;
+        $this->activityService = $activityService;
+        $this->buildingService = $buildingService;
+    }
 
     /**
      * @OA\Get(
      *     path="/api/companies",
      *     tags={"Companies"},
      *     summary="Получить список организаций",
+     *     security={{"api_key": {}}},
      *     @OA\Parameter(
      *         name="name",
      *         in="query",
@@ -124,6 +142,7 @@ class CompanyApiController extends Controller
      *     path="/api/companies/{id}",
      *     tags={"Companies"},
      *     summary="Получить информацию об организации",
+     *     security={{"api_key": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -154,6 +173,7 @@ class CompanyApiController extends Controller
      *     path="/api/companies/{id}/buildings",
      *     tags={"Companies"},
      *     summary="Получить организации в здании",
+     *     security={{"api_key": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -185,6 +205,7 @@ class CompanyApiController extends Controller
      *     path="/api/activities/{id}/companies",
      *     tags={"Activities"},
      *     summary="Получить компании по виду деятельности",
+     *     security={{"api_key": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -217,6 +238,7 @@ class CompanyApiController extends Controller
      *     path="/api/activities/{id}/companies/with-children",
      *     tags={"Activities"},
      *     summary="Получить организации по виду деятельности включая дочерние",
+     *     security={{"api_key": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
